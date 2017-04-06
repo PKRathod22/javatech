@@ -1,0 +1,44 @@
+1)For fixed header use <class="navbar-fixed-top">
+2) show active <class="navactive">
+
+
+
+
+
+
+
+
+
+
+*********************************************************************************************************
+---------------------------------problem facing in project:-----------------------------------------------
+*********************************************************************************************************
+Error starting ApplicationContext. To display the auto-configuration report re-run your application with 'debug' enabled.
+2016-12-25 12:03:00.526 ERROR 15553 --- [           main] o.s.b.d.LoggingFailureAnalysisReporter   : 
+--jpa jar
+
+*for factory
+ module-'ngResource', and js file- angular-route.js
+
+
+
+
+--->if @RequestBody not given to parameter then always null value will send to the given api.
+
+
+
+
+
+
+
+
+
+
+*****************************jar for project ***************************
+1--JpaRepository
+Need to add two jar
+   1.spring-data-jpa
+   2.spring-data-common
+
+
+

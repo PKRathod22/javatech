@@ -1,0 +1,52 @@
+<!--ng-class="$first ? 'width4per': headObj.width"-->
+
+<table id="super-table" class="table super-table" table-fix-header>
+    <thead>
+    <tr>
+        <th ng-class="headObj.width" class="" ng-repeat="headObj in head" data-prefwidth="{{headObj.prefWidth}}" ng-show="headObj.model!='id'"
+            ng-click="changeOrder(headObj)" ng-mouseover="highLightArrow=true" ng-mouseleave="highLightArrow=false">
+            <span ng-if="(headObj.type!='number' && headObj.type!='currency')" class="pull-left hand" ng-bind-html="headObj.name"></span>
+            <span ng-if="(headObj.type=='number' || headObj.type=='currency')" class="pull-right hand" ng-bind-html="headObj.name"></span>
+            <span  ng-if="(headObj.type!='number' && headObj.type!='currency')" ng-show="headObj.model==sort.sortKey && headObj.sort" ng-class="{'transform0deg':sort.sortOrder=='asc','transform180deg':sort.sortOrder=='desc'}" style="right:10px;" class="pull-right sorting-wrapper hand"><i class="icon-ascending-arrow ascend-icon"></i></span>
+            <span ng-if="(headObj.type=='number' || headObj.type=='currency')" ng-show="headObj.model==sort.sortKey && headObj.sort" ng-class="{'transform0deg':sort.sortOrder=='asc','transform180deg':sort.sortOrder=='desc'}" style="left:20px;" class="pull-left sorting-wrapper hand"><i class="icon-ascending-arrow ascend-icon"></i></span>
+        </th>
+
+    </tr>
+    <tr>
+        <th  ng-repeat="headObj in head" ng-show="headObj.model!='id'" class="rel">
+            <form novalidate>
+                <i ng-if="$first" style="font-size:1.3rem !important;" class="icon-search"></i>
+                <input ng-if="headObj.search && (headObj.type=='text' || headObj.type=='link')" ng-model="searchData[headObj.key]" ng-model-options='{ debounce: 1000 }' type="text" ng-change="changeFunction()" class="form-control input-sm"/>
+                <input ng-if="headObj.search && (headObj.type=='number' ||headObj.type=='currency') " ng-model="searchData[headObj.key]" ng-model-options='{ debounce: 1000 }' type="text" ng-change="changeFunction()" class="form-control input-sm text-right"/>
+                <input ng-if="headObj.search && headObj.type=='date-range'"  data-date-range-picker data-options="datepickeropts" ng-model="searchData[headObj.key]"  type="text" clearable="true" style="padding-right: 26px !important;" class="form-control input-sm date-picker cur-pointer" readonly/>
+                <input ng-if="headObj.search && headObj.type=='date-time-range'"  data-date-range-picker data-options="datepickeropts" ng-model="searchData[headObj.key]"  type="text" clearable="true" style="padding-right: 26px !important;" class="form-control input-sm date-picker cur-pointer" readonly/>
+                <span ng-if="headObj.search && (headObj.type=='date-range' || headObj.type=='date-time-range')" class="abs event-none" style="top: 16px; right: 20px;"><i class="icon-date-picker" aria-hidden="true"></i></span>
+                <select ng-if="headObj.search && headObj.type=='drop'" ng-model="searchData[headObj.key]"
+                        class="form-control input-sm"
+                        ng-options="item for item in headObj.data"
+                        ng-change="changeFunction()">
+                    <option value="">ALL</option>
+                </select>
+            </form>
+        </th>
+
+    </tr>
+    </thead>
+    <tbody id="table-body" >
+    <tr ng-repeat="itemObj in data"  ng-click="rowSelect(itemObj,$index)" ng-style="getStyle($index,selectedRow)">
+        <td  ng-repeat="headObj in head"  ng-show="headObj.model!='id'"   class="{{headObj.width}}" title="{{setTitle(headObj.type,itemObj,headObj.model)}}" ng-class="{ 'overFlowInherit':headObj.model=='no' || headObj.name=='#','text-right':headObj.type=='number' || headObj.type=='currency'}">
+
+            {{headObj.model=='no'?(page*size)+($parent.$index+1):setValue(headObj.type,itemObj,headObj.model)}}
+            <show-status ng-if="headObj.model=='status'" status="{{itemObj[headObj.model]}}"></show-status>
+            <show-mail ng-if="headObj.model=='autoMailStatus'" status="{{itemObj[headObj.model]}}"></show-mail>
+            <a href="javascript:void(0);" class="hyperLink" ng-click="rowClickLink($event,itemObj,$parent.$index)" ng-if="headObj.type=='link'">{{setLink(headObj.type,itemObj,headObj.model)}}</a>
+            <img ng-if="headObj.type=='img'" data-ng-src="data:image/png;base64,{{findProp(itemObj,headObj.model)}}" class="img-responsive avatar img-circle"/>
+            <ul class="list-inline" ng-show="headObj.type =='action' && (itemObj[headObj.model]!='GENERATED'|| itemObj[headObj.model]!='generated')">
+                <li class="cursorPt"><a title="Re-use MAWB" ng-click="actionClick({param:{type:'refresh',data:itemObj}})"><i class="fa fa-refresh"></i></a></li>
+                <li class="cursorPt"><a title="Cancel MAWB" ng-click="actionClick({param:{type:'ban',data:itemObj}})"><i class="fa fa-ban"></i></a></li>
+            </ul>
+            <!--</div>-->
+        </td>
+    </tr>
+    </tbody>
+</table>

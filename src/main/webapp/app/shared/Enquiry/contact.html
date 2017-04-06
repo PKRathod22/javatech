@@ -1,0 +1,87 @@
+        <!-- ============ Contact Section  ============= -->
+
+           <!--  <div ng-hide="true" class="map">
+                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3618.664063989472!2d91.8316103150038!3d24.909437984030877!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x37505558dd0be6a1%3A0x65c7e47c94b6dc45!2sTechnext!5e0!3m2!1sen!2sbd!4v1444461079802" width="100%" height="450" frameborder="0" style="border:0" allowfullscreen></iframe>
+            </div> -->
+<div>
+	<div class="container">
+		<div class="row">
+			<div class="col-md-12 ">
+				<div class="inner contact">
+					<!-- Form Area -->
+					<div class="contact-form"  >
+						<h3 ng-show="!contactView">Send Enquiry</h3>
+						<!-- Form -->
+						<form role="form" name="contactDataForm" ng-show="!contactView">
+							<!-- Left Inputs -->
+							<div class="col-md-6 ">
+								<!-- Name -->
+								Name: <input type="text" ng-model="contact.name"
+									input-focus="true" id="contactName" required="required"
+									class="form" placeholder="Name" />
+								<!-- Email -->
+								Email: <input type="email" ng-model="contact.email" id="email"
+									required="required" class="form" placeholder="Email" />
+								<!-- Subject -->
+								<input ng-hide="true" type="text" class="form"
+									placeholder="Subject (optional)" />
+							</div>
+							<!-- End Left Inputs -->
+							<!-- Right Inputs -->
+							<div class="col-md-6">
+								<!-- Message -->
+								Message:
+								<textarea ng-model="contact.message" id="message"
+									class="form textarea" placeholder="Message"></textarea>
+							</div>
+							<!-- End Right Inputs -->
+							<!-- Bottom Submit -->
+							<div class="relative fullwidth col-xs-12">
+								<!-- Send Button -->
+								<button ng-click="sendEnquiry(contact)" type="button"
+									id="submit" name="submit" class="form-btn">Send
+									Message</button>
+								<button ng-click="contactList()" type="button"
+									class="form-btn">Contact List</button>
+							</div>
+							<!-- End Bottom Submit -->
+							<!-- Clear -->
+							<div class="clear"></div>
+						</form>
+					<div ng-if="contactView">
+					<button ng-click="back()" type="button" >BACK</button>
+					<h3>Total User Request :   {{totalRecord}} and Active Status is : {{ActivetatusCount}}</h3>
+						<table border="1" >
+						<tr height="50px" align="center" bgcolor="#eef1f5">
+						  <td>search</td>
+							<td><input type="text" ng-model="contactSearch.name" ></td>
+							<td><input type="text" ng-model="contactSearch.email" ></td>
+							<td><input type="text" ng-model="contactSearch.message" ></td>
+							<td><input type="text" ng-model="contactSearch.status" ></td>
+						</tr>
+						
+						
+						
+							<tr height="50px" align="center" bgcolor="#eef1f5">
+								<th>#</th>
+								<th color="$ffff" bgcolor="#eef1f5">Name</th>
+								<th bgcolor="#eef1f5">Email</th>
+								<th bgcolor="#eef1f5">Message</th>
+								<th bgcolor="#eef1f5">Status</th>
+							</tr>
+							<tr ng-repeat="contact in contactData | filter:contactSearch:startsWith  track by $index">
+								<td height="50px" width="50px">{{$index+1}}</td>
+								<td height="50px" width="400px">{{contact.name}}</td>
+								<td height="50px" width="400px">{{contact.email}}</td>
+								<td height="50px" width="400px">{{contact.message}}</td>
+								<td height="50px" width="400px">{{contact.status}}</td>
+							</tr>
+						</table>
+						
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>	

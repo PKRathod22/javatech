@@ -1,0 +1,23 @@
+<div  class="container">
+	<div class="row">
+		<div class="col-md-12 ">
+					<table border="1" ng-init="add()" >
+					<tr height="50px" align="center" bgcolor="#eef1f5">	<th>#</th>
+						<th color="$ffff" bgcolor="#eef1f5" >Name</th>
+						<th bgcolor="#eef1f5">Email</th>
+						<th bgcolor="#eef1f5">Message</th>
+         </tr>
+						<tr ng-repeat="contact in contactData  track by $index">
+							<td height="50px" width="50px">{{$index+1}}</td>
+							<td height="50px" width="400px">{{contact.name}}</td>
+							<td height="50px" width="400px">{{contact.email}}</td>
+							<td height="50px" width="400px">{{contact.message}}</td>
+						</tr>
+					</table>
+
+
+				</div>
+			</div>
+		</div>
+	
+                           

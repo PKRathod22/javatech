@@ -1,0 +1,34 @@
+<ul class="list-inline pull-left" ng-if="total<1">
+    <li>No Entries Found</li>
+</ul>
+<ul class="list-inline pull-left" ng-if="total>0 && size>=total">
+    <li>Showing</li>
+    <li>
+        <span class="meta-data">{{total}}</span>
+    </li>
+    <li>{{total==1?'Entry':'Entries'}}</li>
+</ul>
+<ul class="list-inline pull-left" ng-if="total>0 && size<total">
+    <li>Showing</li>
+    <li>
+        <span class="meta-data">{{(page*size)+1}} - {{total > (page+1)*size ? (page+1)*size : total}} of {{total}}</span>
+    </li>
+    <li>Entries</li>
+</ul>
+<ul ng-show="total>0 && size<total" class="pagination">
+    <li ng-class="prevPageDisabled()">
+        <a href ng-click="firstPage()">««</a>
+    </li>
+    <li ng-class="prevPageDisabled()">
+        <a href ng-click="prevPage()">«</a>
+    </li>
+    <li ng-repeat="n in range()" ng-class="{active: n == currentPage}" ng-click="setPage(n)">
+        <a href>{{n+1}}</a>
+    </li>
+    <li ng-class="nextPageDisabled()">
+        <a href ng-click="nextPage()">»</a>
+    </li>
+    <li ng-class="nextPageDisabled()">
+        <a href ng-click="lastPage()">»»</a>
+    </li>
+</ul>
